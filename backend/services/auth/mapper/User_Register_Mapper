@@ -1,0 +1,21 @@
+// userMapper.js
+const UserRegisterDTO = require("../DTO/user_Register_DTO"); // Adjust path if necessary
+
+const toDTO = (user) => {
+  return new UserRegisterDTO(user);
+};
+
+const toModel = (dto) => {
+  return {
+    name: dto.name,
+    email: dto.email,
+    password: dto.password,
+    role: dto.role, // Default role for registration should be set elsewhere
+    isVerified: dto.isVerified,
+  };
+};
+
+module.exports = {
+  toDTO,
+  toModel,
+};

@@ -3,15 +3,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
-
-dotenv.config();
-
-// const parseExpiration = require("../utils/parseExpiration");
+const { toModel } = require("../mapper/User_Register_Mapper");
 const parseExpiration = require("../../utils/parseExpiration");
 const sendVerificationMail = require("../../utils/sendVerificationMail");
 
-const registerUser = async ({ name, email, password }) => {
-  let user = await User.findOne({ email });
+dotenv.config();
+
+const registerUser = async (dto) => {
+  let user = await User.findOne({ email: dto.email });
 
   // Check whether user already exists
   if (user) {
@@ -49,15 +48,18 @@ const registerUser = async ({ name, email, password }) => {
     return { msg: `Verification Email Sent`, token: verificationToken };
   }
 
-  // Create a new user and generate a new verification token
-  user = new User({
-    name,
-    email,
-    password,
-  });
+  // Convert DTO to Mongoose model
+  user = new User(
+    toModel({
+      name: dto.name,
+      email: dto.email,
+      password: dto.password,
+      isVerified: dto.isVerified || false,
+    })
+  );
 
   const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(password, salt);
+  user.password = await bcrypt.hash(dto.password, salt);
 
   const expirationInMilliSeconds = parseExpiration(
     process.env.VERIFICATION_TOKEN_EXPIRATION

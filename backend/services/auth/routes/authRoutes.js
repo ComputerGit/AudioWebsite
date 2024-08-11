@@ -7,7 +7,12 @@ const {
   loginUser,
   requestPasswordReset,
   resetPassword,
+  deleteUser,
+  deleteManyUsers,
 } = require("../controllers/authController");
+const {
+  deleteAllUsersService,
+} = require("../use-cases/deletion/deleteUserService");
 
 router.post(
   "/register",
@@ -53,17 +58,20 @@ router.post(
 
 module.exports = router;
 
-// router.post(
-//   "/register",
-//   [
-//     check("name", "Name is required").not().isEmpty(),
-//     check("email", "Please include a valid email").isEmail(),
-//     check(
-//       "password",
-//       "Please enter a password with 6 or more characters"
-//     ).isLength({ min: 6 }),
-//   ],
-//   registerUser
-// );
+router.delete(
+  "/delete-user",
+  [
+    check("name", "User name is required").not().isEmpty(), // Validate name
+  ],
+  deleteUser
+);
 
-// module.exports = router;
+module.exports = router;
+
+router.delete(
+  "/delete-all",
+  [check("name", "A list of Users Names is Required ").isArray().notEmpty()],
+  deleteManyUsers
+);
+
+module.exports = router;
