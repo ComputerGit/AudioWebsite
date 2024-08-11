@@ -1,0 +1,95 @@
+# Environment files
+.env
+.env.*
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+/dist
+/build
+*.tgz
+
+# Dependency directories
+bower_components/
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-project
+*.sublime-workspace
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.cab
+*.dll
+*.exe
+*.iso
+*.log
+*.msi
+*.nib
+*.plist
+*.tmp
+*.gz
+*.zip
+*.tar
+*.7z
+
+# Database files
+*.sqlite
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Python-specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Java-specific
+*.class
+*.jar
+*.war
+*.ear
+*.class
+
+# Go-specific
+*.go
+*.out
+
+# Rust-specific
+target/
+
+# .NET-specific
+*.dll
+*.exe
+*.pdb
+*.cache
+*.config
+*.vs
+*.suo
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# macOS Finder
+.DS_Store
+
+# Linux
+*~
